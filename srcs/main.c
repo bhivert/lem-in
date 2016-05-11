@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 11:32:11 by bhivert           #+#    #+#             */
-/*   Updated: 2016/05/08 12:22:24 by bhivert          ###   ########.fr       */
+/*   Updated: 2016/05/11 09:35:53 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@ void	init(t_lemin *e)
 	e->rooms = ft_new_container(MAP, sizeof(t_room));
 	e->adj_mat = NULL;
 	e->stable_mat = NULL;
+}
+
+void	error(void)
+{
+	ft_putendl("ERROR");
+	exit(EXIT_FAILURE);
 }
 
 int		main(void)
