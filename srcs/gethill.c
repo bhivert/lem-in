@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 12:22:39 by bhivert           #+#    #+#             */
-/*   Updated: 2016/05/12 14:17:30 by bhivert          ###   ########.fr       */
+/*   Updated: 2016/05/12 14:35:23 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,13 @@ static void	create_adj_mat(t_lemin *e)
 		e->adj_mat[i] = e->adj_mat[i - 1] + max_room;
 }
 
+static void	set_adj(t_lemin *e, char *in, char *out)
+{
+	t_room	*in_room;
+	t_room	*out_room;
+
+}
+
 static int	get_pipe(t_lemin *e, char *line)
 {
 	char	*in;
@@ -89,7 +96,7 @@ static int	get_pipe(t_lemin *e, char *line)
 			free(in);
 			badalloc(__FILE__, __LINE__);
 		}
-		// << == set 
+		// << == set
 		free(out);
 	}
 	free(in);
