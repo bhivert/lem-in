@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 11:32:46 by bhivert           #+#    #+#             */
-/*   Updated: 2016/05/12 12:12:25 by bhivert          ###   ########.fr       */
+/*   Updated: 2016/05/12 13:03:14 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct	s_lemin
 }				t_lemin;
 
 void			error(void);
+void			badalloc(char *file, int line);
 
 char			**split(const char *str, char c, size_t *size);
 
