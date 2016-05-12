@@ -30,11 +30,14 @@ LIBS_DIR	=	-Llibft \
 LIBS		=	-lft \
 
 INCS_FLAGS	=	-Iincludes \
+			-Ilibft/includes \
 
 SUB_MAKE	=	libft \
 
 SRCS_DIR	=	srcs
-SRCS_SRCS	=	$(SRCS_DIR)/main.c \
+SRCS_SRCS	=	$(SRCS_DIR)/gethill.c \
+			$(SRCS_DIR)/main.c \
+			$(SRCS_DIR)/split.c \
 
 SRCS_STREAM_DIR	=	srcs/stream
 SRCS_STREAM_SRCS	=	$(SRCS_STREAM_DIR)/stream_delete.c \
@@ -44,8 +47,12 @@ SRCS_STREAM_SRCS	=	$(SRCS_STREAM_DIR)/stream_delete.c \
 			$(SRCS_STREAM_DIR)/stream_out.c \
 			$(SRCS_STREAM_DIR)/stream_state.c \
 
+SRCS_BITSET_DIR	=	srcs/bitset
+SRCS_BITSET_SRCS	=	$(SRCS_BITSET_DIR)/bitset.c \
+
 SRCS		=	$(SRCS_SRCS) \
 			$(SRCS_STREAM_SRCS) \
+			$(SRCS_BITSET_SRCS) \
 
 OBJS		=	$(SRCS:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 12:22:39 by bhivert           #+#    #+#             */
-/*   Updated: 2016/05/12 14:35:23 by bhivert          ###   ########.fr       */
+/*   Updated: 2016/05/12 16:37:58 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static int	get_room(t_lemin *e, char *line, t_room **sav)
 	t_room	room;
 
 	i = 0;
+	write(1, "666\n", 4);
 	while (line[i] && line[i] != ' ')
 		++i;
 	if (!line[i])
@@ -51,6 +52,7 @@ static void	create_adj_mat(t_lemin *e)
 	size_t	i;
 	size_t	max_room;
 
+	write(1, "555\n", 4);
 	i = 0;
 	max_room = ft_size(e->rooms);
 	if (!(e->adj_mat = (char **)malloc(sizeof(char *) * max_room)))
@@ -70,6 +72,13 @@ static void	set_adj(t_lemin *e, char *in, char *out)
 	t_room	*in_room;
 	t_room	*out_room;
 
+	write(1, "444\n", 4);
+	if (!(in_room = ft_at_key(e->rooms, in)))
+		error();
+	if (!(out_room = ft_at_key(e->rooms, out)))
+		error();
+	e->adj_mat[in_room->id][out_room->id] = 1;
+	e->adj_mat[out_room->id][in_room->id] = 1;
 }
 
 static int	get_pipe(t_lemin *e, char *line)
@@ -79,6 +88,7 @@ static int	get_pipe(t_lemin *e, char *line)
 	size_t	i;
 	size_t	sd;
 
+	write(1, "333\n", 4);
 	i = 0;
 	if (!e->adj_mat)
 		create_adj_mat(e);
@@ -96,9 +106,11 @@ static int	get_pipe(t_lemin *e, char *line)
 			free(in);
 			badalloc(__FILE__, __LINE__);
 		}
-		// << == set
+		set_adj(e, in, out);
 		free(out);
 	}
+	else
+		error();
 	free(in);
 	return (0);
 }
@@ -108,6 +120,7 @@ static void	iscmd(t_lemin *e, t_stream *s, char *line)
 	t_room		**tmp;
 	t_string	l;
 
+	write(1, "222\n", 4);
 	tmp = NULL;
 	if (!ft_strcmp(line, "##start") && !e->start)
 		tmp = &e->start;
@@ -119,13 +132,25 @@ static void	iscmd(t_lemin *e, t_stream *s, char *line)
 		get_room(e, line, tmp);
 }
 
+static int	ispipe(char *line)
+{
+	size_t	i;
+	write(1, "111\n", 4);
+
+	i = 0;
+	while (line[i] && line[i] != '-')
+		++i;
+	if (line[i] == '-')
+		return (1);
+	return (0);
+}
+
 void		gethill(t_lemin *e)
 {
-	size_t		i;
 	t_stream	*stdin;
 	t_string	line;
 
-	i = 0;
+	write(1, "000\n", 4);
 	stdin = ft_new_stream(0, 4096);
 	while (ft_stream_good(stdin))
 	{
@@ -139,10 +164,12 @@ void		gethill(t_lemin *e)
 				(void)NULL;
 			else
 			{
-//				if () // room
-//					;
-//				else // pipe
-//					;
+				if (ispipe(line.str) || (e->adj_mat && ispipe(line.str)))
+					get_pipe(e, line.str);
+				else if (!ispipe(line.str))
+					get_room(e, line.str, NULL);
+				else
+					error();
 			}
 		}
 		free(line.str);

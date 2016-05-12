@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 11:32:11 by bhivert           #+#    #+#             */
-/*   Updated: 2016/05/12 13:03:04 by bhivert          ###   ########.fr       */
+/*   Updated: 2016/05/12 16:38:40 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,22 @@ int		main(void)
 	t_lemin		e;
 
 	init(&e);
+	gethill(&e);
+	size_t	x, y;
+
+	write(1, "777\n", 4);
+	x = 0;
+	while (x < ft_size(e.rooms))
+	{
+		y = 0;
+		while (y < ft_size(e.rooms))
+		{
+			ft_putnbr(e.adj_mat[y][x]);
+			ft_putstr(" ");
+			++y;
+		}
+		ft_putchar('\n');
+		++x;
+	}
 	return (EXIT_SUCCESS);
 }
