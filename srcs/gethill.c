@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 12:22:39 by bhivert           #+#    #+#             */
-/*   Updated: 2016/05/11 10:02:15 by bhivert          ###   ########.fr       */
+/*   Updated: 2016/05/12 12:12:28 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,28 @@ static int	get_room(t_lemin *e, char *line)
 	return (0);
 }
 
-static int	get_pipe(char *line)
+static void	create_adj_mat(t_lemin *e)
 {
+	size_t	i;
+	size_t	max_room;
+
+	i = 0;
+	max_room = ft_size(e->rooms);
+	if (!(e->adj_mat = (char **)malloc(sizeof(char *) * max_room)))
+		;
+	if (!(e->adj_mat[0] = (char *)malloc(sizeof(char) * max_room * max_room)))
+		;
+	while (++i < max_room)
+		e->adj_mat[i] = e->adj_mat[i - 1] + max_room;
+}
+
+static int	get_pipe(t_lemin *e, char *line)
+{
+	size_t	i;
+
+	i = 0;
+	while (line[i] && line[i] != '-')
+		++i;
 	return (0);
 }
 

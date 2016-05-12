@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 11:32:46 by bhivert           #+#    #+#             */
-/*   Updated: 2016/05/11 09:36:00 by bhivert          ###   ########.fr       */
+/*   Updated: 2016/05/12 12:12:25 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct	s_pipe
 
 typedef struct	s_lemin
 {
-	t_int		ants;
+	size_t		ants;
 	t_room		*start;
 	t_room		*end;
 	t_container	*rooms;
