@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 12:22:39 by bhivert           #+#    #+#             */
-/*   Updated: 2016/05/12 16:37:58 by bhivert          ###   ########.fr       */
+/*   Updated: 2016/05/13 13:25:19 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static int	get_room(t_lemin *e, char *line, t_room **sav)
 	t_room	room;
 
 	i = 0;
-	write(1, "666\n", 4);
 	while (line[i] && line[i] != ' ')
 		++i;
 	if (!line[i])
@@ -37,9 +36,8 @@ static int	get_room(t_lemin *e, char *line, t_room **sav)
 		free(room.name);
 		return (1);
 	}
-	if (!sav)
-		ft_insert(e->rooms, &room, room.name);
-	else
+	ft_insert(e->rooms, &room, room.name);
+	if (sav)
 	{
 		if (!(*sav = ft_memdup(&room, sizeof(t_room))))
 			badalloc(__FILE__, __LINE__);
@@ -52,7 +50,6 @@ static void	create_adj_mat(t_lemin *e)
 	size_t	i;
 	size_t	max_room;
 
-	write(1, "555\n", 4);
 	i = 0;
 	max_room = ft_size(e->rooms);
 	if (!(e->adj_mat = (char **)malloc(sizeof(char *) * max_room)))
@@ -72,13 +69,19 @@ static void	set_adj(t_lemin *e, char *in, char *out)
 	t_room	*in_room;
 	t_room	*out_room;
 
-	write(1, "444\n", 4);
 	if (!(in_room = ft_at_key(e->rooms, in)))
 		error();
 	if (!(out_room = ft_at_key(e->rooms, out)))
 		error();
 	e->adj_mat[in_room->id][out_room->id] = 1;
 	e->adj_mat[out_room->id][in_room->id] = 1;
+}
+
+#include <stdio.h>
+
+void	put(void *r)
+{
+	printf("%s %zu\n", ((t_room *)r)->name, ((t_room *)r)->id);
 }
 
 static int	get_pipe(t_lemin *e, char *line)
@@ -88,10 +91,13 @@ static int	get_pipe(t_lemin *e, char *line)
 	size_t	i;
 	size_t	sd;
 
-	write(1, "333\n", 4);
 	i = 0;
 	if (!e->adj_mat)
+	{
 		create_adj_mat(e);
+		ft_debug_container(e->rooms, &put);
+
+	}
 	while (line[i] && line[i] != '-')
 		++i;
 	if (!(in = ft_strsub(line, 0, i)))
@@ -120,7 +126,6 @@ static void	iscmd(t_lemin *e, t_stream *s, char *line)
 	t_room		**tmp;
 	t_string	l;
 
-	write(1, "222\n", 4);
 	tmp = NULL;
 	if (!ft_strcmp(line, "##start") && !e->start)
 		tmp = &e->start;
@@ -135,7 +140,6 @@ static void	iscmd(t_lemin *e, t_stream *s, char *line)
 static int	ispipe(char *line)
 {
 	size_t	i;
-	write(1, "111\n", 4);
 
 	i = 0;
 	while (line[i] && line[i] != '-')
@@ -150,7 +154,6 @@ void		gethill(t_lemin *e)
 	t_stream	*stdin;
 	t_string	line;
 
-	write(1, "000\n", 4);
 	stdin = ft_new_stream(0, 4096);
 	while (ft_stream_good(stdin))
 	{
