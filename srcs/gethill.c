@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 12:22:39 by bhivert           #+#    #+#             */
-/*   Updated: 2016/05/13 13:25:19 by bhivert          ###   ########.fr       */
+/*   Updated: 2016/05/13 14:48:26 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	get_room(t_lemin *e, char *line, t_room **sav)
 	ft_insert(e->rooms, &room, room.name);
 	if (sav)
 	{
-		if (!(*sav = ft_memdup(&room, sizeof(t_room))))
+		if (!((*sav) = ft_memdup(&room, sizeof(t_room))))
 			badalloc(__FILE__, __LINE__);
 	}
 	return (0);
@@ -77,13 +77,6 @@ static void	set_adj(t_lemin *e, char *in, char *out)
 	e->adj_mat[out_room->id][in_room->id] = 1;
 }
 
-#include <stdio.h>
-
-void	put(void *r)
-{
-	printf("%s %zu\n", ((t_room *)r)->name, ((t_room *)r)->id);
-}
-
 static int	get_pipe(t_lemin *e, char *line)
 {
 	char	*in;
@@ -93,11 +86,7 @@ static int	get_pipe(t_lemin *e, char *line)
 
 	i = 0;
 	if (!e->adj_mat)
-	{
 		create_adj_mat(e);
-		ft_debug_container(e->rooms, &put);
-
-	}
 	while (line[i] && line[i] != '-')
 		++i;
 	if (!(in = ft_strsub(line, 0, i)))
@@ -133,8 +122,8 @@ static void	iscmd(t_lemin *e, t_stream *s, char *line)
 		tmp = &e->end;
 	if (!tmp)
 		error();
-	if ((l.size = ft_stream_getline(s, &l.str) > -1))
-		get_room(e, line, tmp);
+	if ((l.size = ft_stream_getline(s, &l.str)) > -1)
+		get_room(e, l.str, tmp);
 }
 
 static int	ispipe(char *line)

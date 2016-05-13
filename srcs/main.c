@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 11:32:11 by bhivert           #+#    #+#             */
-/*   Updated: 2016/05/13 13:21:27 by bhivert          ###   ########.fr       */
+/*   Updated: 2016/05/13 14:47:50 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int		main(void)
 	gethill(&e);
 	size_t	x, y;
 
-	write(1, "777\n", 4);
 	x = 0;
 	while (x < ft_size(e.rooms))
 	{
