@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 11:32:46 by bhivert           #+#    #+#             */
-/*   Updated: 2016/05/12 16:25:04 by bhivert          ###   ########.fr       */
+/*   Updated: 2016/05/14 12:59:16 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LEM_IN_H
 
 # include <stdlib.h>
+# include <limits.h>
 # include "libft.h"
 # include "ft_containers.h"
 
@@ -39,10 +40,11 @@ typedef struct	s_pipe
 
 typedef struct	s_lemin
 {
-	size_t		ants;
+	t_int		ants;
 	t_room		*start;
 	t_room		*end;
 	t_container	*rooms;
+	t_container	*pipes;
 	char		**adj_mat;
 	int			**stable_mat;
 }				t_lemin;
@@ -52,5 +54,6 @@ void			badalloc(char *file, int line);
 
 char			**split(const char *str, char c, size_t *size);
 void			gethill(t_lemin *e);
+void			checkhill(t_lemin *e);
 
 #endif

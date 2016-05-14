@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 11:32:11 by bhivert           #+#    #+#             */
-/*   Updated: 2016/05/13 14:47:50 by bhivert          ###   ########.fr       */
+/*   Updated: 2016/05/14 13:01:06 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 void	init(t_lemin *e)
 {
-	e->ants = (size_t)-1;
+	e->ants = LLONG_MIN;
 	e->start = NULL;
 	e->end = NULL;
 	e->rooms = ft_new_container(MAP, sizeof(t_room));
+	e->pipes = ft_new_container(DEQUE, sizeof(t_pipe));
 	e->adj_mat = NULL;
 	e->stable_mat = NULL;
 }
@@ -44,6 +45,7 @@ int		main(void)
 
 	init(&e);
 	gethill(&e);
+	checkhill(&e);
 	size_t	x, y;
 
 	x = 0;
