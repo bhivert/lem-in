@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 12:22:39 by bhivert           #+#    #+#             */
-/*   Updated: 2016/05/14 13:05:31 by bhivert          ###   ########.fr       */
+/*   Updated: 2016/05/15 10:04:24 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ static int	get_pipe(t_lemin *e, char *line)
 		++i;
 	if (!(pipe.out = ft_strsub(line, sd, i - sd)))
 		badalloc(__FILE__, __LINE__);
-	if (i != sd && set_adj(e, pipe.in, pipe.out))
+	if (i == sd || (i != sd && set_adj(e, pipe.in, pipe.out)))
 	{
 		free(pipe.in);
 		free(pipe.out);

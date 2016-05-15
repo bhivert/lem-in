@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/14 10:45:16 by bhivert           #+#    #+#             */
-/*   Updated: 2016/05/14 10:46:24 by bhivert          ###   ########.fr       */
+/*   Updated: 2016/05/15 10:06:51 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 
 void	checkhill(t_lemin *e)
 {
-	(void)e;
+	if (e->ants < 0 || !e->start || !e->end || !e->adj_mat)
+		error();
 }
