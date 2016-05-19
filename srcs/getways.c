@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/15 10:23:58 by bhivert           #+#    #+#             */
-/*   Updated: 2016/05/19 14:25:22 by bhivert          ###   ########.fr       */
+/*   Updated: 2016/05/19 15:44:22 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static size_t	getpossibility(t_lemin *e, size_t room)
 	return (n);
 }
 
-static void		getways_rec(t_lemin *e, t_container *tbn, size_t current_room)
+static void		getways_rec(t_lemin *e, t_container *begin, size_t current_room)
 {
 	size_t	i;
 	size_t	possibility;
@@ -36,10 +36,6 @@ static void		getways_rec(t_lemin *e, t_container *tbn, size_t current_room)
 	possibility = getpossibility(e, current_room);
 	while (++i < possibility)
 	{
-		if (!i)
-			;
-		else
-			;
 	}
 }
 
