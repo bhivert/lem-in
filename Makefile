@@ -37,6 +37,7 @@ SUB_MAKE	=	libft \
 SRCS_DIR	=	srcs
 SRCS_SRCS	=	$(SRCS_DIR)/checkhill.c \
 			$(SRCS_DIR)/gethill.c \
+			$(SRCS_DIR)/getways.c \
 			$(SRCS_DIR)/main.c \
 			$(SRCS_DIR)/split.c \
 

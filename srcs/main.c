@@ -6,22 +6,11 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 11:32:11 by bhivert           #+#    #+#             */
-/*   Updated: 2016/05/14 13:01:06 by bhivert          ###   ########.fr       */
+/*   Updated: 2016/05/19 09:40:02 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
-void	init(t_lemin *e)
-{
-	e->ants = LLONG_MIN;
-	e->start = NULL;
-	e->end = NULL;
-	e->rooms = ft_new_container(MAP, sizeof(t_room));
-	e->pipes = ft_new_container(DEQUE, sizeof(t_pipe));
-	e->adj_mat = NULL;
-	e->stable_mat = NULL;
-}
 
 void	error(void)
 {
@@ -39,6 +28,21 @@ void	badalloc(char *file, int line)
 	exit(EXIT_FAILURE);
 }
 
+void	init(t_lemin *e)
+{
+	e->ants = LLONG_MIN;
+	e->start = NULL;
+	e->end = NULL;
+	if (!(e->rooms = ft_new_container(MAP, sizeof(t_room))))
+		badalloc(__FILE__, __LINE__);
+	if (!(e->pipes = ft_new_container(DEQUE, sizeof(t_pipe))))
+		badalloc(__FILE__, __LINE__);
+	e->adj_mat = NULL;
+	if (!(e->ways = ft_new_container(VECTOR, sizeof(t_container *))))
+		badalloc(__FILE__, __LINE__);
+	e->stable_mat = NULL;
+}
+
 int		main(void)
 {
 	t_lemin		e;
@@ -46,6 +50,7 @@ int		main(void)
 	init(&e);
 	gethill(&e);
 	checkhill(&e);
+
 	size_t	x, y;
 
 	x = 0;

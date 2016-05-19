@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 11:32:46 by bhivert           #+#    #+#             */
-/*   Updated: 2016/05/14 12:59:16 by bhivert          ###   ########.fr       */
+/*   Updated: 2016/05/15 10:23:43 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct	s_lemin
 	t_container	*rooms;
 	t_container	*pipes;
 	char		**adj_mat;
+	t_container	*ways;
 	int			**stable_mat;
 }				t_lemin;
 
