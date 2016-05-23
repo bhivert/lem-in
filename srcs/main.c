@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 11:32:11 by bhivert           #+#    #+#             */
-/*   Updated: 2016/05/19 09:40:02 by bhivert          ###   ########.fr       */
+/*   Updated: 2016/05/23 15:21:42 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,17 @@ void	init(t_lemin *e)
 	e->stable_mat = NULL;
 }
 
+static void	putw(size_t *r)
+{
+	ft_putnbr(*r);
+	ft_putchar(' ');
+}
+
+static void	put(t_container **c)
+{
+	ft_debug_container(*c, (void(*)(void *))&putw);
+}
+
 int		main(void)
 {
 	t_lemin		e;
@@ -50,6 +61,7 @@ int		main(void)
 	init(&e);
 	gethill(&e);
 	checkhill(&e);
+	getways(&e);
 
 	size_t	x, y;
 
@@ -66,5 +78,8 @@ int		main(void)
 		ft_putchar('\n');
 		++x;
 	}
+
+	ft_debug_container(e.ways, (void(*)(void *))&put);
+
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 11:32:46 by bhivert           #+#    #+#             */
-/*   Updated: 2016/05/23 10:29:25 by bhivert          ###   ########.fr       */
+/*   Updated: 2016/05/23 13:45:44 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,6 @@ void			badalloc(char *file, int line);
 char			**split(const char *str, char c, size_t *size);
 void			gethill(t_lemin *e);
 void			checkhill(t_lemin *e);
+void			getways(t_lemin *e);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 12:22:39 by bhivert           #+#    #+#             */
-/*   Updated: 2016/05/15 10:04:24 by bhivert          ###   ########.fr       */
+/*   Updated: 2016/05/23 15:01:07 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static int	get_pipe(t_lemin *e, char *line)
 		++i;
 	if (!(pipe.in = ft_strsub(line, 0, i)))
 		badalloc(__FILE__, __LINE__);
-	if (line[i])
+	if (!(sd = 0) && line[i])
 		sd = ++i;
 	while (line[i])
 		++i;
