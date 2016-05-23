@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/15 10:23:58 by bhivert           #+#    #+#             */
-/*   Updated: 2016/05/23 10:47:29 by bhivert          ###   ########.fr       */
+/*   Updated: 2016/05/23 13:03:29 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,17 @@ t_container		*create_begins(t_lemin *e, t_container *current_way, \
 	return (begins);
 }
 
-static size_t	getnextpossibility(t_lemin *e, t_container *current_room, \
-					size_t possibility)
+static size_t	getnextpossibility(t_lemin *e, size_t current_room, \
+					size_t last_possibility)
 {
+	size_t	i;
+
+	i = last_possibility;
+	while (++i < ft_size(e->rooms))
+	{
+		if (e->adj_mat[current_room][i])
+			return (i);
+	}
 	return (-1);
 }
 
@@ -59,23 +67,30 @@ static void		getways_rec(t_lemin *e, t_container *current_way, \
 	size_t		i;
 	t_container	*begins;
 	t_container	**b;
+	size_t		possibility;
 
 	i = (size_t)-1;
+	possibility = (size_t)-1;
 	if (current_room == e->end->id)
 		ft_push_back(e->ways, &current_way);
 	else
 	{
-		while (++i < ft_size(begins))
+		if ((begins = create_begins(e, current_way, current_room)))
 		{
-			begins = create_begins(e, current_way, current_room);
-			if ((b = ft_at_index(begins, 0)))
+			while (++i < ft_size(begins))
 			{
-				;
+				if ((b = ft_at_index(begins, ft_size(begins) - 1)))
+				{
+					possibility = getnextpossibility(e, current_room, \
+							possibility);
+					// check possibility
+					ft_push_back(*b, &possibility);
+					getways_rec(e, *b, possibility);
+					ft_pop_back(begins);
+				}
 			}
+			ft_delete_container(&begins);
 		}
-		// push possibility
-
-		ft_delete_container(&begins);
 	}
 }
 
