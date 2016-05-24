@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 11:32:11 by bhivert           #+#    #+#             */
-/*   Updated: 2016/05/23 15:21:42 by bhivert          ###   ########.fr       */
+/*   Updated: 2016/05/24 12:38:53 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,13 @@ static void	putw(size_t *r)
 	ft_putchar(' ');
 }
 
+static void	putr(t_room *r)
+{
+	ft_putstr(r->name);
+	ft_putstr(" id = ");
+	ft_putnbr(r->id);
+}
+
 static void	put(t_container **c)
 {
 	ft_debug_container(*c, (void(*)(void *))&putw);
@@ -61,7 +68,6 @@ int		main(void)
 	init(&e);
 	gethill(&e);
 	checkhill(&e);
-	getways(&e);
 
 	size_t	x, y;
 
@@ -78,6 +84,9 @@ int		main(void)
 		ft_putchar('\n');
 		++x;
 	}
+
+	ft_debug_container(e.rooms, (void(*)(void *))&putr);
+	getways(&e);
 
 	ft_debug_container(e.ways, (void(*)(void *))&put);
 
