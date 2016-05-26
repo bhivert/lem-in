@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 11:32:11 by bhivert           #+#    #+#             */
-/*   Updated: 2016/05/24 12:38:53 by bhivert          ###   ########.fr       */
+/*   Updated: 2016/05/26 11:28:08 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	init(t_lemin *e)
 		badalloc(__FILE__, __LINE__);
 	e->stable_mat = NULL;
 }
-
+/*
 static void	putw(size_t *r)
 {
 	ft_putnbr(*r);
@@ -60,6 +60,7 @@ static void	put(t_container **c)
 {
 	ft_debug_container(*c, (void(*)(void *))&putw);
 }
+*/
 
 int		main(void)
 {
@@ -85,10 +86,10 @@ int		main(void)
 		++x;
 	}
 
-	ft_debug_container(e.rooms, (void(*)(void *))&putr);
+//	ft_debug_container(e.rooms, (void(*)(void *))&putr);
 	getways(&e);
 
-	ft_debug_container(e.ways, (void(*)(void *))&put);
+//	ft_debug_container(e.ways, (void(*)(void *))&put);
 
 	return (EXIT_SUCCESS);
 }

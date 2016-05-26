@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 13:10:30 by bhivert           #+#    #+#             */
-/*   Updated: 2016/03/17 11:46:27 by bhivert          ###   ########.fr       */
+/*   Updated: 2016/05/26 11:26:31 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ ssize_t			ft_stream_getline(t_stream *stream, char **line)
 	fact = stream_line_alloc(stream, line, 0);
 	while (ft_stream_good(stream))
 	{
-		if ((avail = ft_buff_in_avail(stream->buff)) > 0)
+		if (((avail = ft_buff_in_avail(stream->buff))) > 0)
 		{
 			tmp = ft_buff_get_check(stream->buff, (*line) + size, \
 					(stream->buff_size * fact) - size, &line_check);

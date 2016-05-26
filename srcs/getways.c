@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/15 10:23:58 by bhivert           #+#    #+#             */
-/*   Updated: 2016/05/24 16:28:40 by bhivert          ###   ########.fr       */
+/*   Updated: 2016/05/26 12:25:48 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,6 @@ static int		checkway(t_container *way, size_t room)
 	return (context[1]);
 }
 
-#include <stdio.h>
-
 static void		getways_rec(t_lemin *e, t_container *current_way, \
 					size_t current_room)
 {
@@ -89,33 +87,35 @@ static void		getways_rec(t_lemin *e, t_container *current_way, \
 	size_t		possibility;
 
 	possibility = (size_t)-1;
-	printf("%zu -> ", current_room);
 	ft_push_back(current_way, &current_room);
 	if (current_room == e->end->id)
 	{
-		printf("\n");
+	write(1, "999\n", 4);
 		ft_push_back(e->ways, &current_way);
 	}
 	else
 	{
+	write(1, "000\n", 4);
 		if ((begins = create_begins(e, current_way, current_room)))
 		{
-			printf("|%zu| : ", ft_size(begins));
 			while (ft_size(begins))
 			{
-				if ((possibility = getnextpossibility(e, \
-								current_room, possibility)) == (size_t)-1)
+				if (((possibility = getnextpossibility(e, \
+								current_room, possibility))) == (size_t)-1)
 					break ;
+	write(1, "111\n", 4);
 				if ((b = ft_at_index(begins, ft_size(begins) - 1)))
 				{
 					if (!checkway(*b, possibility))
-						getways_rec(e, *b, possibility);
+					{
+	write(1, "222\n", 4); getways_rec(e, *b, possibility);
+					}
 					else
-						ft_delete_container(b);
-					ft_pop_back(begins);
+					{
+	write(1, "333\n", 4); ft_pop_back(begins);
+					}
 				}
 			}
-		printf("\n");
 			ft_delete_container(&begins);
 		}
 	}
