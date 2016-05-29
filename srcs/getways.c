@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/15 10:23:58 by bhivert           #+#    #+#             */
-/*   Updated: 2016/05/26 12:25:48 by bhivert          ###   ########.fr       */
+/*   Updated: 2016/05/29 13:11:22 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,37 +87,38 @@ static void		getways_rec(t_lemin *e, t_container *current_way, \
 	size_t		possibility;
 
 	possibility = (size_t)-1;
+//ft_putstr("# current_room : ");
+//ft_putnbr(current_room);
+//ft_putchar('\n');
 	ft_push_back(current_way, &current_room);
 	if (current_room == e->end->id)
 	{
-	write(1, "999\n", 4);
+//ft_putstr("##end\n");
 		ft_push_back(e->ways, &current_way);
 	}
 	else
 	{
-	write(1, "000\n", 4);
-		if ((begins = create_begins(e, current_way, current_room)))
+		if (!(begins = create_begins(e, current_way, current_room)))
+			badalloc(__FILE__, __LINE__);
+		while (ft_size(begins))
 		{
-			while (ft_size(begins))
+			if (((possibility = getnextpossibility(e, current_room, possibility))) == (size_t)-1)
+				break ;
+//ft_putstr("# possibility : ");
+//ft_putnbr(possibility);
+//ft_putchar('\n');
+			if ((b = ft_at_index(begins, ft_size(begins) - 1)))
 			{
-				if (((possibility = getnextpossibility(e, \
-								current_room, possibility))) == (size_t)-1)
-					break ;
-	write(1, "111\n", 4);
-				if ((b = ft_at_index(begins, ft_size(begins) - 1)))
+				if (!checkway(*b, possibility))
+					getways_rec(e, *b, possibility);
+				else
 				{
-					if (!checkway(*b, possibility))
-					{
-	write(1, "222\n", 4); getways_rec(e, *b, possibility);
-					}
-					else
-					{
-	write(1, "333\n", 4); ft_pop_back(begins);
-					}
+//ft_putstr("# delete way\n\n");
+					ft_pop_back(begins);
 				}
 			}
-			ft_delete_container(&begins);
 		}
+		ft_delete_container(&begins);
 	}
 }
 
