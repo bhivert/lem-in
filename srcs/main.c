@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 11:32:11 by bhivert           #+#    #+#             */
-/*   Updated: 2016/06/05 16:50:13 by bhivert          ###   ########.fr       */
+/*   Updated: 2016/06/05 21:57:01 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,10 @@ int		main(void)
 	init(&e);
 	gethill(&e);
 	checkhill(&e);
+	getways(&e);
 
+// =============================================================================
 	size_t	x, y;
-
 	x = 0;
 	while (x < ft_size(e.rooms))
 	{
@@ -84,11 +85,8 @@ int		main(void)
 		ft_putchar('\n');
 		++x;
 	}
-
 	ft_debug_container(e.rooms, (void(*)(void *))&putr);
-	getways(&e);
-
 	ft_debug_container(e.ways, (void(*)(void *))&put);
-
+// =============================================================================
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 12:22:39 by bhivert           #+#    #+#             */
-/*   Updated: 2016/06/05 20:22:01 by bhivert          ###   ########.fr       */
+/*   Updated: 2016/06/05 20:40:25 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,14 +138,13 @@ void		gethill(t_lemin *e)
 	t_string		line;
 	static t_bool	set = D_FALSE;
 
+	line.str = NULL;
 	stdin = ft_new_stream(0, 4096);
 	while (ft_stream_good(stdin))
 	{
+		free(line.str);
 		if (!((line.size = ft_stream_getline(stdin, &line.str)) > -1))
-		{
-			free(line.str);
 			continue ;
-		}
 		if (ft_strncmp(line.str, "##", 2) && !ft_strncmp(line.str, "#", 1))
 			(void)NULL;
 		else if (!set && (set = D_TRUE))
@@ -153,27 +152,18 @@ void		gethill(t_lemin *e)
 		else if (!ft_strncmp(line.str, "##", 2))
 		{
 			if (iscmd(e, stdin, line.str))
-			{
-				free(line.str);
 				break ;
-			}
 		}
 		else if (ispipe(line.str) || (e->adj_mat && ispipe(line.str)))
 		{
 			if (get_pipe(e, line.str))
-			{
-				free(line.str);
 				break ;
-			}
 		}
 		else if (!ispipe(line.str) && !e->adj_mat)
 			get_room(e, line.str, NULL);
 		else
-		{
-			free(line.str);
 			break ;
-		}
-		free(line.str);
 	}
+	free(line.str);
 	ft_delete_stream(&stdin);
 }
