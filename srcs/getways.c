@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/15 10:23:58 by bhivert           #+#    #+#             */
-/*   Updated: 2016/05/29 13:11:22 by bhivert          ###   ########.fr       */
+/*   Updated: 2016/06/05 20:07:02 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,37 +87,27 @@ static void		getways_rec(t_lemin *e, t_container *current_way, \
 	size_t		possibility;
 
 	possibility = (size_t)-1;
-//ft_putstr("# current_room : ");
-//ft_putnbr(current_room);
-//ft_putchar('\n');
 	ft_push_back(current_way, &current_room);
 	if (current_room == e->end->id)
-	{
-//ft_putstr("##end\n");
 		ft_push_back(e->ways, &current_way);
-	}
 	else
 	{
 		if (!(begins = create_begins(e, current_way, current_room)))
 			badalloc(__FILE__, __LINE__);
 		while (ft_size(begins))
 		{
-			if (((possibility = getnextpossibility(e, current_room, possibility))) == (size_t)-1)
+			if ((possibility = getnextpossibility(e, current_room, possibility)) == (size_t)-1)
 				break ;
-//ft_putstr("# possibility : ");
-//ft_putnbr(possibility);
-//ft_putchar('\n');
 			if ((b = ft_at_index(begins, ft_size(begins) - 1)))
 			{
 				if (!checkway(*b, possibility))
 					getways_rec(e, *b, possibility);
 				else
-				{
-//ft_putstr("# delete way\n\n");
-					ft_pop_back(begins);
-				}
+					ft_delete_container(b);
+				ft_pop_back(begins);
 			}
 		}
+		ft_set_content_destroy(begins, (void(*)(void *))&ft_delete_container);
 		ft_delete_container(&begins);
 	}
 }
