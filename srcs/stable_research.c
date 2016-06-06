@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 08:28:06 by bhivert           #+#    #+#             */
-/*   Updated: 2016/06/06 12:33:21 by bhivert          ###   ########.fr       */
+/*   Updated: 2016/06/06 15:44:30 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,24 @@ static void	create_stable_mat(t_lemin *e)
 	ft_memset(e->stable_mat[0], 0, sizeof(int) * max_ways * max_ways);
 	while (++i < max_ways)
 		e->stable_mat[i] = e->stable_mat[i - 1] + (sizeof(int) * max_ways);
+
+	/*
+	size_t	i;
+	size_t	max_ways;
+
+	i = 0;
+	max_ways = ft_size(e->ways);
+	if (!(e->stable_mat = (int **)malloc(sizeof(int *) * max_ways)))
+		badalloc(__FILE__, __LINE__);
+	if (!(e->stable_mat[0] = (int *)malloc(sizeof(int) * max_ways * max_ways)))
+	{
+		free(e->stable_mat);
+		badalloc(__FILE__, __LINE__);
+	}
+	ft_memset(e->stable_mat[0], 0, sizeof(int) * max_ways * max_ways);
+	while (++i < max_ways)
+		e->stable_mat[i] = e->stable_mat[i - 1] + (sizeof(int) * max_ways);
+		*/
 }
 
 static void	collision_check_fct1(t_context *context, size_t *id)
@@ -49,6 +67,8 @@ static int	collision_check(t_lemin *e, t_container *way_y, t_container *way_x)
 {
 	t_context	context;
 
+	if (way_y == way_x)
+		return (1);
 	context.start_id = e->start->id;
 	context.end_id = e->end->id;
 	context.id = (size_t)-1;
@@ -74,7 +94,7 @@ static void	fill_stable_mat(t_lemin *e)
 		{
 			way_x = ft_at_index(e->ways, x);
 			if (!collision_check(e, *way_y, *way_x))
-				e->stable_mat[y][x] = ft_size(*way_y) + ft_size(*way_x) - 4;
+				e->stable_mat[y][x] = ft_size(*way_y) + ft_size(*way_x);
 		}
 	}
 }
