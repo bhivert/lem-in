@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 11:32:11 by bhivert           #+#    #+#             */
-/*   Updated: 2016/06/05 21:57:01 by bhivert          ###   ########.fr       */
+/*   Updated: 2016/06/06 12:24:40 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,18 @@ static void	putw(size_t *r)
 	ft_putchar(' ');
 	ft_putnbr(*r);
 }
-
+/*
 static void	putr(t_room *r)
 {
 	ft_putstr(r->name);
 	ft_putstr(" id = ");
 	ft_putnbr(r->id);
 }
-
+*/
 static void	put(t_container **c)
 {
 	ft_debug_container(*c, (void(*)(void *))&putw);
+	ft_putchar('\n');
 }
 
 int		main(void)
@@ -69,24 +70,39 @@ int		main(void)
 	gethill(&e);
 	checkhill(&e);
 	getways(&e);
+	stableresearch(&e);
 
 // =============================================================================
 	size_t	x, y;
-	x = 0;
-	while (x < ft_size(e.rooms))
+	y = 0;
+	while (y < ft_size(e.rooms))
 	{
-		y = 0;
-		while (y < ft_size(e.rooms))
+		x = 0;
+		while (x < ft_size(e.rooms))
 		{
 			ft_putnbr(e.adj_mat[y][x]);
 			ft_putstr(" ");
-			++y;
+			++x;
 		}
 		ft_putchar('\n');
-		++x;
+		++y;
 	}
-	ft_debug_container(e.rooms, (void(*)(void *))&putr);
+//	ft_debug_container(e.rooms, (void(*)(void *))&putr);
 	ft_debug_container(e.ways, (void(*)(void *))&put);
 // =============================================================================
+	y = 0;
+	while (y < ft_size(e.ways))
+	{
+		x = 0;
+		while (x < ft_size(e.ways))
+		{
+			ft_putnbr(e.stable_mat[y][x]);
+			ft_putstr(" ");
+			++x;
+		}
+		ft_putchar('\n');
+		++y;
+	}
+
 	return (EXIT_SUCCESS);
 }

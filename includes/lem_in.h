@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 11:32:46 by bhivert           #+#    #+#             */
-/*   Updated: 2016/05/23 13:45:44 by bhivert          ###   ########.fr       */
+/*   Updated: 2016/06/06 11:29:55 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,21 @@ typedef struct	s_lemin
 	int			**stable_mat;
 }				t_lemin;
 
+typedef struct	s_context
+{
+	size_t		start_id;
+	size_t		end_id;
+	size_t		id;
+	t_container	*way;
+	size_t		result;
+}				t_context;
+
 void			error(void);
 void			badalloc(char *file, int line);
 
-char			**split(const char *str, char c, size_t *size);
 void			gethill(t_lemin *e);
 void			checkhill(t_lemin *e);
 void			getways(t_lemin *e);
+void			stableresearch(t_lemin *e);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/15 10:23:58 by bhivert           #+#    #+#             */
-/*   Updated: 2016/06/06 09:15:56 by bhivert          ###   ########.fr       */
+/*   Updated: 2016/06/06 10:09:23 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,13 @@ static size_t	getnextpossibility(t_lemin *e, size_t current_room, \
 	return (-1);
 }
 
-void		checkway_fct(size_t *context, size_t *content)
+static void		checkway_fct(size_t *context, size_t *content)
 {
 	if (context[0] == *content)
 		context[1] = 1;
 }
 
-static int		checkway(t_container *way, size_t room)
+static size_t	checkway(t_container *way, size_t room)
 {
 	size_t	context[2];
 
