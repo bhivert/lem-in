@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 08:28:06 by bhivert           #+#    #+#             */
-/*   Updated: 2016/06/06 15:44:30 by bhivert          ###   ########.fr       */
+/*   Updated: 2016/06/07 08:56:29 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,25 +28,7 @@ static void	create_stable_mat(t_lemin *e)
 	}
 	ft_memset(e->stable_mat[0], 0, sizeof(int) * max_ways * max_ways);
 	while (++i < max_ways)
-		e->stable_mat[i] = e->stable_mat[i - 1] + (sizeof(int) * max_ways);
-
-	/*
-	size_t	i;
-	size_t	max_ways;
-
-	i = 0;
-	max_ways = ft_size(e->ways);
-	if (!(e->stable_mat = (int **)malloc(sizeof(int *) * max_ways)))
-		badalloc(__FILE__, __LINE__);
-	if (!(e->stable_mat[0] = (int *)malloc(sizeof(int) * max_ways * max_ways)))
-	{
-		free(e->stable_mat);
-		badalloc(__FILE__, __LINE__);
-	}
-	ft_memset(e->stable_mat[0], 0, sizeof(int) * max_ways * max_ways);
-	while (++i < max_ways)
-		e->stable_mat[i] = e->stable_mat[i - 1] + (sizeof(int) * max_ways);
-		*/
+		e->stable_mat[i] = e->stable_mat[i - 1] + max_ways;
 }
 
 static void	collision_check_fct1(t_context *context, size_t *id)

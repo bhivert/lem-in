@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 12:22:39 by bhivert           #+#    #+#             */
-/*   Updated: 2016/06/06 11:07:44 by bhivert          ###   ########.fr       */
+/*   Updated: 2016/06/07 08:49:52 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	create_adj_mat(t_lemin *e)
 	}
 	ft_memset(e->adj_mat[0], 0, sizeof(char) * max_room * max_room);
 	while (++i < max_room)
-		e->adj_mat[i] = e->adj_mat[i - 1] + (sizeof(char) * max_room);
+		e->adj_mat[i] = e->adj_mat[i - 1] + max_room;
 }
 
 static int	set_adj(t_lemin *e, char *in, char *out)
