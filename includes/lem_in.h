@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 11:32:46 by bhivert           #+#    #+#             */
-/*   Updated: 2016/06/06 11:29:55 by bhivert          ###   ########.fr       */
+/*   Updated: 2016/06/07 11:35:22 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,15 @@ typedef struct	s_string
 	ssize_t		size;
 	char		*str;
 }				t_string;
+
+typedef struct	s_context
+{
+	size_t		start_id;
+	size_t		end_id;
+	size_t		id;
+	t_container	*way;
+	size_t		result;
+}				t_context;
 
 typedef struct	s_room
 {
@@ -48,16 +57,8 @@ typedef struct	s_lemin
 	char		**adj_mat;
 	t_container	*ways;
 	int			**stable_mat;
+	t_container	*way_set;
 }				t_lemin;
-
-typedef struct	s_context
-{
-	size_t		start_id;
-	size_t		end_id;
-	size_t		id;
-	t_container	*way;
-	size_t		result;
-}				t_context;
 
 void			error(void);
 void			badalloc(char *file, int line);

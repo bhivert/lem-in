@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 11:32:11 by bhivert           #+#    #+#             */
-/*   Updated: 2016/06/06 12:24:40 by bhivert          ###   ########.fr       */
+/*   Updated: 2016/06/07 11:37:19 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	init(t_lemin *e)
 	if (!(e->ways = ft_new_container(VECTOR, sizeof(t_container *))))
 		badalloc(__FILE__, __LINE__);
 	e->stable_mat = NULL;
+	if (!(e->way_set = ft_new_container(VECTOR, sizeof(int))))
+		badalloc(__FILE__, __LINE__);
 }
 
 static void	putw(size_t *r)

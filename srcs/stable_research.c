@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 08:28:06 by bhivert           #+#    #+#             */
-/*   Updated: 2016/06/07 10:12:47 by bhivert          ###   ########.fr       */
+/*   Updated: 2016/06/07 11:38:48 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,11 @@ static void	fill_stable_mat(t_lemin *e)
 				e->stable_mat[y][x] = ft_size(*way_y) + ft_size(*way_x) - 4;
 		}
 	}
+}
+
+void		stable_mat_interpretation(t_lemin *e)
+{
+	(void)e;
 }
 
 void		stableresearch(t_lemin *e)
