@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 08:28:06 by bhivert           #+#    #+#             */
-/*   Updated: 2016/06/07 11:38:48 by bhivert          ###   ########.fr       */
+/*   Updated: 2016/06/07 13:41:29 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,13 +81,57 @@ static void	fill_stable_mat(t_lemin *e)
 	}
 }
 
-void		stable_mat_interpretation(t_lemin *e)
+static size_t	get_sum(t_lemin *e, size_t id)
 {
-	(void)e;
+	size_t	i;
+	size_t	sum;
+
+	i = -1;
+	sum = 0;
+	while (++i < ft_size(e->ways))
+		sum += e->stable_mat[id][i];
+	return (sum);
+}
+
+static size_t	get_collision(t_lemin *e, size_t id)
+{
+	size_t	i;
+	size_t	collision;
+
+	i = -1;
+	collision = 0;
+	while (++i < ft_size(e->ways))
+	{
+		if (!e->stable_mat[id][i])
+			++collision;
+	}
+	return (collision);
+}
+
+static size_t	get_ways_set(t_lemin *e)
+{
+	t_wayset	set;
+	size_t		y;
+	size_t		x;
+
+	y = -1;
+	while (++y < ft_size(e->ways))
+	{
+		x = -1;
+		while (++x < ft_size(e->ways))
+		{
+			; // << ==
+		}
+	}
+	return ((size_t)-1);
 }
 
 void		stableresearch(t_lemin *e)
 {
+	size_t	set;
+
 	create_stable_mat(e);
 	fill_stable_mat(e);
+	if ((set = get_ways_set(e)) == (size_t)-1)
+		error();
 }

@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 11:32:46 by bhivert           #+#    #+#             */
-/*   Updated: 2016/06/07 11:35:22 by bhivert          ###   ########.fr       */
+/*   Updated: 2016/06/07 13:29:33 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,13 @@ typedef struct	s_context
 	t_container	*way;
 	size_t		result;
 }				t_context;
+
+typedef struct	s_wayset
+{
+	size_t		id;
+	size_t		collision;
+	size_t		sum;
+}				t_wayset;
 
 typedef struct	s_room
 {
