@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 08:28:06 by bhivert           #+#    #+#             */
-/*   Updated: 2016/06/07 13:41:29 by bhivert          ###   ########.fr       */
+/*   Updated: 2016/06/07 14:01:52 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ static size_t	get_collision(t_lemin *e, size_t id)
 static size_t	get_ways_set(t_lemin *e)
 {
 	t_wayset	set;
+	t_wayset	tmp;
 	size_t		y;
 	size_t		x;
 
@@ -120,7 +121,7 @@ static size_t	get_ways_set(t_lemin *e)
 		x = -1;
 		while (++x < ft_size(e->ways))
 		{
-			; // << ==
+			;
 		}
 	}
 	return ((size_t)-1);
