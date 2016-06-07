@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 08:28:06 by bhivert           #+#    #+#             */
-/*   Updated: 2016/06/07 08:56:29 by bhivert          ###   ########.fr       */
+/*   Updated: 2016/06/07 10:12:47 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static void	fill_stable_mat(t_lemin *e)
 		{
 			way_x = ft_at_index(e->ways, x);
 			if (!collision_check(e, *way_y, *way_x))
-				e->stable_mat[y][x] = ft_size(*way_y) + ft_size(*way_x);
+				e->stable_mat[y][x] = ft_size(*way_y) + ft_size(*way_x) - 4;
 		}
 	}
 }
