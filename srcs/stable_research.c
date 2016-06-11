@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 08:28:06 by bhivert           #+#    #+#             */
-/*   Updated: 2016/06/07 14:01:52 by bhivert          ###   ########.fr       */
+/*   Updated: 2016/06/11 11:50:20 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,42 @@ static void	fill_stable_mat(t_lemin *e)
 	}
 }
 
+static int		**stable_mat_cpy(t_lemin *e)
+{
+	size_t	i;
+	size_t	max_ways;
+	int		**mat;
+
+	i = 0;
+	max_ways = ft_size(e->ways);
+	if (!(mat = (int **)malloc(sizeof(int *) * max_ways)))
+		badalloc(__FILE__, __LINE__);
+	if (!(mat[0] = (int *)malloc(sizeof(int) * max_ways * max_ways)))
+	{
+		free(e->stable_mat);
+		badalloc(__FILE__, __LINE__);
+	}
+	ft_memcpy(mat[0], e->stable_mat[0], sizeof(int) * max_ways * max_ways);
+	while (++i < max_ways)
+		mat[i] = mat[i - 1] + max_ways;
+	return (mat);
+}
+
+static void		stable_sub_set_collision(t_lemin *e, int **mat)
+{
+	size_t	y;
+	size_t	x;
+	size_t	i;
+
+	y = (size_t)-1;
+	while (++y < ft_size(e->ways))
+	{
+		x = (size_t)-1;
+		while (++x < ft_size(e->ways))
+		{}
+	}
+}
+
 static size_t	get_sum(t_lemin *e, size_t id)
 {
 	size_t	i;
@@ -113,16 +149,14 @@ static size_t	get_ways_set(t_lemin *e)
 	t_wayset	set;
 	t_wayset	tmp;
 	size_t		y;
-	size_t		x;
 
 	y = -1;
 	while (++y < ft_size(e->ways))
 	{
-		x = -1;
-		while (++x < ft_size(e->ways))
-		{
-			;
-		}
+		tmp = (t_wayset){y, get_collision(e, y), get_sum(e, y)};
+		if (!y || tmp.collision < set.collision \
+				|| (tmp.collision == set.collision && tmp.sum < set.sum))
+			set = tmp;
 	}
 	return ((size_t)-1);
 }
@@ -130,9 +164,12 @@ static size_t	get_ways_set(t_lemin *e)
 void		stableresearch(t_lemin *e)
 {
 	size_t	set;
+	int		**mat_cpy;
 
 	create_stable_mat(e);
 	fill_stable_mat(e);
+	mat_cpy = stable_mat_cpy(e);
+	stable_sub_set_collision(e, mat_cpy);
 	if ((set = get_ways_set(e)) == (size_t)-1)
 		error();
 }
