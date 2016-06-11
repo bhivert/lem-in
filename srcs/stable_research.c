@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 08:28:06 by bhivert           #+#    #+#             */
-/*   Updated: 2016/06/11 15:37:29 by bhivert          ###   ########.fr       */
+/*   Updated: 2016/06/11 16:18:03 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,10 +117,22 @@ static void		stable_sub_set_collision(t_lemin *e, int **mat)
 			while (x < ft_size(e->ways) - 1 && e->stable_mat[y][x])
 				++x;
 			i = x;
-			while (++i < ft_size(e->ways) && e->stable_mat[y][i])
+			while (++i < ft_size(e->ways))
 			{
-				if (1) //check collision
+				if (!e->stable_mat[y][i])
+					continue ;
+				if (!mat[x][i])
 				{
+					if (e->stable_mat[y][x] > e->stable_mat[y][i])
+						e->stable_mat[y][x] = 0;
+					else if (e->stable_mat[y][x] < e->stable_mat[y][i])
+						e->stable_mat[y][i] = 0;
+					else // ==
+					{
+						(void)NULL;
+						// = 0 celui a le moins de collision avec les autres
+						// break if [y][x] = 0
+					}
 				}
 			}
 		}
