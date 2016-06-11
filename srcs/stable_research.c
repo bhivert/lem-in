@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 08:28:06 by bhivert           #+#    #+#             */
-/*   Updated: 2016/06/11 11:50:20 by bhivert          ###   ########.fr       */
+/*   Updated: 2016/06/11 15:37:29 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,17 @@ static void		stable_sub_set_collision(t_lemin *e, int **mat)
 	{
 		x = (size_t)-1;
 		while (++x < ft_size(e->ways))
-		{}
+		{
+			while (x < ft_size(e->ways) - 1 && e->stable_mat[y][x])
+				++x;
+			i = x;
+			while (++i < ft_size(e->ways) && e->stable_mat[y][i])
+			{
+				if (1) //check collision
+				{
+				}
+			}
+		}
 	}
 }
 
