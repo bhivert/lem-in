@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 08:28:06 by bhivert           #+#    #+#             */
-/*   Updated: 2016/06/12 13:06:46 by bhivert          ###   ########.fr       */
+/*   Updated: 2016/06/12 16:44:20 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,9 +222,10 @@ void		stableresearch(t_lemin *e)
 	fill_stable_mat(e);
 	mat_cpy = stable_mat_cpy(e);
 
-		ft_putchar('\n');
 // =============================================================================
 	size_t	x, y;
+
+	ft_putchar('\n');
 	y = 0;
 	while (y < ft_size(e->ways))
 	{
@@ -238,12 +239,14 @@ void		stableresearch(t_lemin *e)
 		ft_putchar('\n');
 		++y;
 	}
+
 // =============================================================================
 
 	stable_sub_set_collision(e, mat_cpy);
 
-		ft_putchar('\n');
 // =============================================================================
+
+	ft_putchar('\n');
 	y = 0;
 	while (y < ft_size(e->ways))
 	{
@@ -257,6 +260,7 @@ void		stableresearch(t_lemin *e)
 		ft_putchar('\n');
 		++y;
 	}
+
 // =============================================================================
 
 //	if ((set = get_ways_set(e)) == (size_t)-1)
