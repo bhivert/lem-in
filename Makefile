@@ -39,6 +39,7 @@ SRCS_SRCS	=	$(SRCS_DIR)/checkhill.c \
 			$(SRCS_DIR)/gethill.c \
 			$(SRCS_DIR)/getways.c \
 			$(SRCS_DIR)/main.c \
+			$(SRCS_DIR)/print_hill.c \
 			$(SRCS_DIR)/stable_research.c \
 
 SRCS_STREAM_DIR	=	srcs/stream

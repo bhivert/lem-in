@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 12:22:39 by bhivert           #+#    #+#             */
-/*   Updated: 2016/06/07 08:49:52 by bhivert          ###   ########.fr       */
+/*   Updated: 2017/01/17 16:37:10 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,9 +142,10 @@ void		gethill(t_lemin *e)
 	stdin = ft_new_stream(0, 4096);
 	while (ft_stream_good(stdin))
 	{
-		free(line.str);
+//		free(line.str);
 		if (!((line.size = ft_stream_getline(stdin, &line.str)) > -1))
 			continue ;
+		ft_push_back(e->input, &line.str);
 		if (ft_strncmp(line.str, "##", 2) && !ft_strncmp(line.str, "#", 1))
 			(void)NULL;
 		else if (!set && (set = D_TRUE))
@@ -164,6 +165,6 @@ void		gethill(t_lemin *e)
 		else
 			break ;
 	}
-	free(line.str);
+//	free(line.str);
 	ft_delete_stream(&stdin);
 }

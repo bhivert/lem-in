@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 08:28:06 by bhivert           #+#    #+#             */
-/*   Updated: 2016/06/12 16:44:20 by bhivert          ###   ########.fr       */
+/*   Updated: 2017/01/17 14:56:10 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,6 +203,9 @@ static size_t	get_ways_set(t_lemin *e)
 	size_t		y;
 
 	y = -1;
+	if (!ft_size(e->ways))
+		return ((size_t)-1);
+	set = (t_wayset){0, 0, (size_t)-1};
 	while (++y < ft_size(e->ways))
 	{
 		tmp = (t_wayset){y, get_collision(e, y), get_sum(e, y)};
@@ -210,10 +213,10 @@ static size_t	get_ways_set(t_lemin *e)
 				|| (tmp.collision == set.collision && tmp.sum < set.sum))
 			set = tmp;
 	}
-	return ((size_t)-1);
+	return (set.id);
 }
 
-void		stableresearch(t_lemin *e)
+size_t		stableresearch(t_lemin *e)
 {
 	size_t	set;
 	int		**mat_cpy;
@@ -224,28 +227,26 @@ void		stableresearch(t_lemin *e)
 
 // =============================================================================
 	size_t	x, y;
-
-	ft_putchar('\n');
-	y = 0;
-	while (y < ft_size(e->ways))
-	{
-		x = 0;
-		while (x < ft_size(e->ways))
-		{
-			ft_putnbr(e->stable_mat[y][x]);
-			ft_putstr(" ");
-			++x;
-		}
-		ft_putchar('\n');
-		++y;
-	}
-
+//
+//	ft_putchar('\n');
+//	y = 0;
+//	while (y < ft_size(e->ways))
+//	{
+//		x = 0;
+//		while (x < ft_size(e->ways))
+//		{
+//			ft_putnbr(e->stable_mat[y][x]);
+//			ft_putstr(" ");
+//			++x;
+//		}
+//		ft_putchar('\n');
+//		++y;
+//	}
 // =============================================================================
 
 	stable_sub_set_collision(e, mat_cpy);
 
 // =============================================================================
-
 	ft_putchar('\n');
 	y = 0;
 	while (y < ft_size(e->ways))
@@ -260,9 +261,10 @@ void		stableresearch(t_lemin *e)
 		ft_putchar('\n');
 		++y;
 	}
-
 // =============================================================================
 
-//	if ((set = get_ways_set(e)) == (size_t)-1)
-//		error();
+	if ((set = get_ways_set(e)) == (size_t)-1)
+		error();
+	// <===
+	return (set);
 }

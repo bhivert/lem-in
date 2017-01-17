@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 11:32:46 by bhivert           #+#    #+#             */
-/*   Updated: 2016/06/07 13:29:33 by bhivert          ###   ########.fr       */
+/*   Updated: 2017/01/17 16:42:09 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct	s_pipe
 
 typedef struct	s_lemin
 {
+	t_container	*input;
 	t_int		ants;
 	t_room		*start;
 	t_room		*end;
@@ -64,7 +65,7 @@ typedef struct	s_lemin
 	char		**adj_mat;
 	t_container	*ways;
 	int			**stable_mat;
-	t_container	*way_set;
+	t_container	*way_set; // <== rsl here
 }				t_lemin;
 
 void			error(void);
@@ -73,6 +74,7 @@ void			badalloc(char *file, int line);
 void			gethill(t_lemin *e);
 void			checkhill(t_lemin *e);
 void			getways(t_lemin *e);
-void			stableresearch(t_lemin *e);
+size_t			stableresearch(t_lemin *e);
+void			print_hill(t_lemin *e);
 
 #endif

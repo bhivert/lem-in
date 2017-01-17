@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 11:32:11 by bhivert           #+#    #+#             */
-/*   Updated: 2016/06/12 12:44:09 by bhivert          ###   ########.fr       */
+/*   Updated: 2017/01/17 16:52:00 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	init(t_lemin *e)
 	e->ants = LLONG_MIN;
 	e->start = NULL;
 	e->end = NULL;
+	if (!(e->input = ft_new_container(VECTOR, sizeof(char *))))
+		badalloc(__FILE__, __LINE__);
 	if (!(e->rooms = ft_new_container(MAP, sizeof(t_room))))
 		badalloc(__FILE__, __LINE__);
 	if (!(e->pipes = ft_new_container(DEQUE, sizeof(t_pipe))))
@@ -50,7 +52,6 @@ static void	putw(size_t *r)
 	ft_putchar(' ');
 	ft_putnbr(*r);
 }
-
 /*
 static void	putr(t_room *r)
 {
@@ -59,40 +60,44 @@ static void	putr(t_room *r)
 	ft_putnbr(r->id);
 }
 */
-
 static void	put(t_container **c)
 {
 	ft_debug_container(*c, (void(*)(void *))&putw);
 	ft_putchar('\n');
 }
 
+# include "ft_printf.h"
 int		main(void)
 {
 	t_lemin		e;
+	size_t		wayset_id;
 
 	init(&e);
 	gethill(&e);
 	checkhill(&e);
 	getways(&e);
+	wayset_id = stableresearch(&e);
+	print_hill(&e);
+
+	ft_printf("%zu\n", wayset_id);
 
 // =============================================================================
-	size_t	x, y;
-	y = 0;
-	while (y < ft_size(e.rooms))
-	{
-		x = 0;
-		while (x < ft_size(e.rooms))
-		{
-			ft_putnbr(e.adj_mat[y][x]);
-			ft_putstr(" ");
-			++x;
-		}
-		ft_putchar('\n');
-		++y;
-	}
+//	size_t	x, y;
+//	y = 0;
+//	while (y < ft_size(e.rooms))
+//	{
+//		x = 0;
+//		while (x < ft_size(e.rooms))
+//		{
+//			ft_putnbr(e.adj_mat[y][x]);
+//			ft_putstr(" ");
+//			++x;
+//		}
+//		ft_putchar('\n');
+//		++y;
+//	}
 //	ft_debug_container(e.rooms, (void(*)(void *))&putr);
 	ft_debug_container(e.ways, (void(*)(void *))&put);
 
-	stableresearch(&e);
 	return (EXIT_SUCCESS);
 }
