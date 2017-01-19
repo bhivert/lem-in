@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 12:22:39 by bhivert           #+#    #+#             */
-/*   Updated: 2017/01/19 17:38:11 by bhivert          ###   ########.fr       */
+/*   Updated: 2017/01/19 19:01:49 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	get_room(t_lemin *e, char *line, t_room **sav)
 			|| room.pos_y < 0)
 		error();
 	ft_insert(e->rooms, &room, room.name);
-//	ft_push_back(e->rooms_ids, &room.name);
+	ft_push_back(e->rooms_ids, &room.name);
 	if (sav && !((*sav) = ft_memdup(&room, sizeof(t_room))))
 		badalloc(__FILE__, __LINE__);
 }

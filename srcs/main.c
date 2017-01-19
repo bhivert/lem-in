@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 11:32:11 by bhivert           #+#    #+#             */
-/*   Updated: 2017/01/19 17:40:09 by bhivert          ###   ########.fr       */
+/*   Updated: 2017/01/19 19:02:31 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	init(t_lemin *e)
 		badalloc(__FILE__, __LINE__);
 	if (!(e->rooms = ft_new_container(MAP, sizeof(t_room))))
 		badalloc(__FILE__, __LINE__);
-//	if (!(e->rooms_ids = ft_new_container(VECTOR, sizeof(char *))))
-//		badalloc(__FILE__, __LINE__);
+	if (!(e->rooms_ids = ft_new_container(VECTOR, sizeof(char *))))
+		badalloc(__FILE__, __LINE__);
 	if (!(e->pipes = ft_new_container(DEQUE, sizeof(t_pipe))))
 		badalloc(__FILE__, __LINE__);
 	e->adj_mat = NULL;
@@ -47,10 +47,10 @@ void	init(t_lemin *e)
 	e->stable_mat = NULL;
 }
 
-static void	putri(char **n)
-{
-	ft_putstr(*n);
-}
+//static void	putri(char **n)
+//{
+//	ft_putstr(*n);
+//}
 ////static void	putr(t_room *r)
 //{
 //	ft_putstr(r->name);
@@ -76,19 +76,12 @@ int		main(void)
 	t_lemin		e;
 	size_t		wayset_id;
 
-	ft_printf("000\n");
 	init(&e);
-	ft_printf("111\n");
 	gethill(&e);
-	ft_printf("222\n");
 	checkhill(&e);
-	ft_printf("333\n");
 	getways(&e);
-	ft_printf("444\n");
 	wayset_id = stableresearch(&e);
-	ft_printf("555\n");
 	print_hill(&e);
-	ft_printf("666\n");
 	ants_run(&e, wayset_id);
 
 // =============================================================================
