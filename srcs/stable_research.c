@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/06 08:28:06 by bhivert           #+#    #+#             */
-/*   Updated: 2017/01/17 14:56:10 by bhivert          ###   ########.fr       */
+/*   Updated: 2017/01/19 11:08:46 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,47 +224,10 @@ size_t		stableresearch(t_lemin *e)
 	create_stable_mat(e);
 	fill_stable_mat(e);
 	mat_cpy = stable_mat_cpy(e);
-
-// =============================================================================
-	size_t	x, y;
-//
-//	ft_putchar('\n');
-//	y = 0;
-//	while (y < ft_size(e->ways))
-//	{
-//		x = 0;
-//		while (x < ft_size(e->ways))
-//		{
-//			ft_putnbr(e->stable_mat[y][x]);
-//			ft_putstr(" ");
-//			++x;
-//		}
-//		ft_putchar('\n');
-//		++y;
-//	}
-// =============================================================================
-
 	stable_sub_set_collision(e, mat_cpy);
-
-// =============================================================================
-	ft_putchar('\n');
-	y = 0;
-	while (y < ft_size(e->ways))
-	{
-		x = 0;
-		while (x < ft_size(e->ways))
-		{
-			ft_putnbr(e->stable_mat[y][x]);
-			ft_putstr(" ");
-			++x;
-		}
-		ft_putchar('\n');
-		++y;
-	}
-// =============================================================================
-
+	free(mat_cpy[0]);
+	free(mat_cpy);
 	if ((set = get_ways_set(e)) == (size_t)-1)
 		error();
-	// <===
 	return (set);
 }

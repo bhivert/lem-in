@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 12:22:39 by bhivert           #+#    #+#             */
-/*   Updated: 2017/01/17 16:37:10 by bhivert          ###   ########.fr       */
+/*   Updated: 2017/01/19 17:38:11 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static void	get_room(t_lemin *e, char *line, t_room **sav)
 			|| room.pos_y < 0)
 		error();
 	ft_insert(e->rooms, &room, room.name);
+//	ft_push_back(e->rooms_ids, &room.name);
 	if (sav && !((*sav) = ft_memdup(&room, sizeof(t_room))))
 		badalloc(__FILE__, __LINE__);
 }
@@ -114,8 +115,8 @@ static int	iscmd(t_lemin *e, t_stream *s, char *line)
 		error();
 	if ((l.size = ft_stream_getline(s, &l.str)) > -1)
 	{
+		ft_push_back(e->input, &l.str);
 		get_room(e, l.str, tmp);
-		free(l.str);
 	}
 	return (0);
 }
@@ -142,7 +143,6 @@ void		gethill(t_lemin *e)
 	stdin = ft_new_stream(0, 4096);
 	while (ft_stream_good(stdin))
 	{
-//		free(line.str);
 		if (!((line.size = ft_stream_getline(stdin, &line.str)) > -1))
 			continue ;
 		ft_push_back(e->input, &line.str);
@@ -165,6 +165,5 @@ void		gethill(t_lemin *e)
 		else
 			break ;
 	}
-//	free(line.str);
 	ft_delete_stream(&stdin);
 }

@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 11:32:46 by bhivert           #+#    #+#             */
-/*   Updated: 2017/01/17 16:42:09 by bhivert          ###   ########.fr       */
+/*   Updated: 2017/01/19 17:27:34 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,20 @@ typedef struct	s_room
 	int			pos_y;
 }				t_room;
 
+typedef struct	s_run_room
+{
+	struct s_run_room	*next;
+	t_room				*room;
+	size_t				ant_id;
+}				t_run_room;
+
+typedef struct	s_run_end
+{
+	t_run_room	**next_tab;
+	size_t		*weight_tab;
+	size_t		tab_size;
+}				t_run_end;
+
 typedef struct	s_pipe
 {
 	char		*in;
@@ -61,11 +75,11 @@ typedef struct	s_lemin
 	t_room		*start;
 	t_room		*end;
 	t_container	*rooms;
+	t_container	*rooms_ids;
 	t_container	*pipes;
 	char		**adj_mat;
 	t_container	*ways;
 	int			**stable_mat;
-	t_container	*way_set; // <== rsl here
 }				t_lemin;
 
 void			error(void);
@@ -76,5 +90,6 @@ void			checkhill(t_lemin *e);
 void			getways(t_lemin *e);
 size_t			stableresearch(t_lemin *e);
 void			print_hill(t_lemin *e);
+void			ants_run(t_lemin *e, size_t wayset_id);
 
 #endif
