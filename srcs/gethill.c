@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 12:22:39 by bhivert           #+#    #+#             */
-/*   Updated: 2017/01/19 19:01:49 by bhivert          ###   ########.fr       */
+/*   Updated: 2017/01/19 19:22:27 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,8 @@ static int	get_pipe(t_lemin *e, char *line)
 		free(pipe.out);
 		return (1);
 	}
-	ft_push_back(e->pipes, &pipe);
+	free(pipe.in);
+	free(pipe.out);
 	return (0);
 }
 

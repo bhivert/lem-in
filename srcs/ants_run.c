@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 11:43:46 by bhivert           #+#    #+#             */
-/*   Updated: 2017/01/19 17:36:15 by bhivert          ###   ########.fr       */
+/*   Updated: 2017/01/19 20:51:26 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,16 @@ static void	fill_active_ways(t_lemin *e, t_container *active_ways, \
 
 static t_run_room	*new_run_room(t_lemin *e, size_t room_id)
 {
-	return (NULL);
+	t_run_room	*new;
+	char		*room_name;
+	t_room		*room;
+
+	if (!(new = (t_run_room *)malloc(sizeof(t_run_room))))
+		badalloc(__FILE__, __LINE__);
+	room_name = *(char **)ft_at_index(e->rooms_ids, room_id);
+	room = *(t_room **)ft_at_key(e->rooms, room_name);
+	*new = (t_run_room){NULL, room, (size_t)-1};
+	return (new);
 }
 
 static void	i_room(void **context, size_t *room_id)
@@ -38,21 +47,16 @@ static void	i_room(void **context, size_t *room_id)
 	t_lemin		*e;
 	t_run_end	*end;
 	size_t		i;
+	t_run_room	*room;
 
 	e = (t_lemin *)context[0];
 	end = (t_run_end *)context[1];
 	i = *(size_t *)context[2];
-	// new run room
-	// push to &end[i]
+	room = new_run_room(e, *room_id);
+	ft_lstadd((t_list **)&end[i], room);
+	// <<<
 }
 
-static void	putw(size_t *r)
-{
-	ft_putchar(' ');
-	ft_putnbr(*r);
-}
-
-# include "ft_printf.h"
 static void	i_ways(void **context, size_t *way_id)
 {
 	t_lemin		*e;
@@ -67,10 +71,6 @@ static void	i_ways(void **context, size_t *way_id)
 	way = *(t_container **)ft_at_index(e->ways, *way_id);
 	ft_iter(way, context, (void(*)(void *, void *))&i_room);
 	end->weight_tab[*i] = ft_size(way) - 2;
-
-// =============================================================================
-	ft_debug_container(way, (void(*)(void *))&putw);
-// =============================================================================
 }
 
 void		ants_run_init(t_lemin* e, t_run_end *end, size_t wayset_id)
@@ -94,11 +94,12 @@ void		ants_run_init(t_lemin* e, t_run_end *end, size_t wayset_id)
 	context[1] = end;
 	context[2] = &i;
 	ft_iter(active_ways, context, (void(*)(void *, void *))&i_ways);
+	// <<<
 }
 
 void	ants_run(t_lemin *e, size_t wayset_id)
 {
 	t_run_end	end;
 
-//	ants_run_init(e, &end, wayset_id);
+	ants_run_init(e, &end, wayset_id);
 }
