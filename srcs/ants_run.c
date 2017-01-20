@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 11:43:46 by bhivert           #+#    #+#             */
-/*   Updated: 2017/01/20 16:03:42 by bhivert          ###   ########.fr       */
+/*   Updated: 2017/01/20 16:27:45 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void		ants_run_init(t_lemin* e, t_run_end *end, size_t wayset_id)
 	end->weight_tab = (size_t *)malloc(sizeof(size_t) * ft_size(active_ways));
 	ft_memset(end->next_tab, 0, sizeof(t_run_room) * ft_size(active_ways));
 	end->tab_size = ft_size(active_ways);
-	end->arrived ^= end->arrived;
+	end->arrived = 0;
 	if (!end->next_tab || !end->weight_tab)
 		badalloc(__FILE__, __LINE__);
 	context[0] = e;
@@ -123,11 +123,11 @@ void	ants_run(t_lemin *e, size_t wayset_id)
 	size_t		i;
 	t_run_room	*tmp;
 
-	last_id ^= last_id;
+	last_id = 0;
 	ants_run_init(e, &end, wayset_id);
 	while (end.arrived != e->ants)
 	{
-		i ^= i;
+		i = 0;
 		while (i < end.tab_size)
 		{
 			tmp = end.next_tab[i];
