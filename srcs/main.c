@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 11:32:11 by bhivert           #+#    #+#             */
-/*   Updated: 2017/01/19 19:27:48 by bhivert          ###   ########.fr       */
+/*   Updated: 2017/01/20 10:05:33 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ void	init(t_lemin *e)
 	e->stable_mat = NULL;
 }
 
-static void	putri(char **n)
-{
-	ft_putstr(*n);
-}
+//static void	putri(char **n)
+//{
+//	ft_putstr(*n);
+//}
 ////static void	putr(t_room *r)
 //{
 //	ft_putstr(r->name);
@@ -84,7 +84,7 @@ int		main(void)
 
 // =============================================================================
 
-	ft_debug_container(e.rooms_ids, (void(*)(void *))&putri);
+//	ft_debug_container(e.rooms_ids, (void(*)(void *))&putri);
 //	ft_debug_container(e.rooms, (void(*)(void *))&putr);
 //	ft_debug_container(e.ways, (void(*)(void *))&put);
 
