@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 11:32:46 by bhivert           #+#    #+#             */
-/*   Updated: 2017/01/20 09:48:22 by bhivert          ###   ########.fr       */
+/*   Updated: 2017/01/20 13:39:37 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct	s_run_end
 	t_run_room	**next_tab;
 	size_t		*weight_tab;
 	size_t		tab_size;
+	t_int		arrived;
 }				t_run_end;
 
 typedef struct	s_pipe
