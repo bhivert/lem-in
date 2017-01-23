@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_hill.c                                       :+:      :+:    :+:   */
+/*   gethill.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/23 10:45:42 by bhivert           #+#    #+#             */
-/*   Updated: 2017/01/23 10:45:45 by bhivert          ###   ########.fr       */
+/*   Created: 2017/01/23 11:22:49 by bhivert           #+#    #+#             */
+/*   Updated: 2017/01/23 11:49:47 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#ifndef GETHILL_H
+# define GETHILL_H
 
-static void	putinput(void *osef, char **line)
-{
-	(void)osef;
-	ft_putendl(*line);
-}
+# include "lem_in.h"
+# include "stream.h"
+# include "ft_scanf.h"
 
-void		print_hill(t_lemin *e)
-{
-	ft_iter(e->input, NULL, (void(*)(void *, void *))&putinput);
-	ft_putendl("");
-}
+void	create_adj_mat(t_lemin *e);
+int		set_adj(t_lemin *e, char *in, char *out);
+int		iscmd(t_lemin *e, t_stream *s, char *line);
+int		ispipe(char *line);
+void	get_room(t_lemin *e, char *line, t_room **sav);
+
+#endif

@@ -6,44 +6,15 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 11:43:46 by bhivert           #+#    #+#             */
-/*   Updated: 2017/01/20 16:27:45 by bhivert          ###   ########.fr       */
+/*   Updated: 2017/01/23 13:38:47 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 #include "ft_printf.h"
+#include "ants_run.h"
 
-static void	fill_active_ways(t_lemin *e, t_container *active_ways, \
-		size_t wayset)
-{
-	size_t	nways;
-	size_t	x;
-
-	nways = ft_size(e->ways);
-	x = (size_t)-1;
-	ft_push_back(active_ways, &wayset);
-	while (++x < nways)
-	{
-		if (e->stable_mat[wayset][x] != 0)
-			ft_push_back(active_ways, &x);
-	}
-}
-
-static t_run_room	*new_run_room(t_lemin *e, size_t room_id)
-{
-	t_run_room	*new;
-	char		*room_name;
-	t_room		*room;
-
-	if (!(new = (t_run_room *)malloc(sizeof(t_run_room))))
-		badalloc(__FILE__, __LINE__);
-	room_name = *(char **)ft_at_index(e->rooms_ids, room_id);
-	room = (t_room *)ft_at_key(e->rooms, room_name);
-	*new = (t_run_room){NULL, room, (size_t)-1};
-	return (new);
-}
-
-static void	i_room(void **context, size_t *room_id)
+static void			i_room(void **context, size_t *room_id)
 {
 	t_lemin		*e;
 	t_run_end	*end;
@@ -60,7 +31,7 @@ static void	i_room(void **context, size_t *room_id)
 	}
 }
 
-static void	i_ways(void **context, size_t *way_id)
+static void			i_ways(void **context, size_t *way_id)
 {
 	t_lemin		*e;
 	t_run_end	*end;
@@ -73,10 +44,9 @@ static void	i_ways(void **context, size_t *way_id)
 	++(*i);
 	way = *(t_container **)ft_at_index(e->ways, *way_id);
 	ft_iter(way, context, (void(*)(void *, void *))&i_room);
-	end->weight_tab[*i] = ft_size(way) - 2;
 }
 
-void		ants_run_init(t_lemin* e, t_run_end *end, size_t wayset_id)
+void				ants_run_init(t_lemin *e, t_run_end *end, size_t wayset_id)
 {
 	t_container	*active_ways;
 	size_t		i;
@@ -88,35 +58,19 @@ void		ants_run_init(t_lemin* e, t_run_end *end, size_t wayset_id)
 	fill_active_ways(e, active_ways, wayset_id);
 	end->next_tab = (t_run_room **)malloc(sizeof(t_run_room) \
 			* ft_size(active_ways));
-	end->weight_tab = (size_t *)malloc(sizeof(size_t) * ft_size(active_ways));
 	ft_memset(end->next_tab, 0, sizeof(t_run_room) * ft_size(active_ways));
 	end->tab_size = ft_size(active_ways);
 	end->arrived = 0;
-	if (!end->next_tab || !end->weight_tab)
+	if (!end->next_tab)
 		badalloc(__FILE__, __LINE__);
 	context[0] = e;
 	context[1] = end;
 	context[2] = &i;
 	ft_iter(active_ways, context, (void(*)(void *, void *))&i_ways);
-// <<< ================ SORT == OR SEE FOR INSERTION SORT ======================
-
-// =============================================================================
-//	t_run_room	*tmp;
-//	size_t	j = (size_t)-1;
-//	while (++j < end->tab_size)
-//	{
-//		tmp = end->next_tab[j];
-//		ft_printf("\n============\n");
-//		while (tmp)
-//		{
-//			ft_printf("%zu: %s (%zu)\n", tmp->room->id, tmp->room->name, tmp->ant_id);
-//			tmp = tmp->next;
-//		}
-//	}
-// =============================================================================
+	ft_delete_container(&active_ways);
 }
 
-void	ants_run(t_lemin *e, size_t wayset_id)
+void				ants_run(t_lemin *e, size_t wayset_id)
 {
 	t_run_end	end;
 	t_int		last_id;
@@ -169,4 +123,5 @@ void	ants_run(t_lemin *e, size_t wayset_id)
 		}
 		ft_putendl("");
 	}
+	free_end_room(&end);
 }

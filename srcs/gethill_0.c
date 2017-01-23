@@ -6,15 +6,13 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 12:22:39 by bhivert           #+#    #+#             */
-/*   Updated: 2017/01/20 16:26:52 by bhivert          ###   ########.fr       */
+/*   Updated: 2017/01/23 17:48:49 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
-#include "stream.h"
-#include "ft_scanf.h"
+#include "gethill.h"
 
-static void	get_room(t_lemin *e, char *line, t_room **sav)
+void		get_room(t_lemin *e, char *line, t_room **sav)
 {
 	size_t	i;
 	t_room	room;
@@ -39,47 +37,13 @@ static void	get_room(t_lemin *e, char *line, t_room **sav)
 		badalloc(__FILE__, __LINE__);
 }
 
-static void	create_adj_mat(t_lemin *e)
-{
-	size_t	i;
-	size_t	max_room;
-
-	i = 0;
-	max_room = ft_size(e->rooms);
-	if (!(e->adj_mat = (char **)malloc(sizeof(char *) * max_room)))
-		badalloc(__FILE__, __LINE__);
-	if (!(e->adj_mat[0] = (char *)malloc(sizeof(char) * max_room * max_room)))
-	{
-		free(e->adj_mat);
-		badalloc(__FILE__, __LINE__);
-	}
-	ft_memset(e->adj_mat[0], 0, sizeof(char) * max_room * max_room);
-	while (++i < max_room)
-		e->adj_mat[i] = e->adj_mat[i - 1] + max_room;
-}
-
-static int	set_adj(t_lemin *e, char *in, char *out)
-{
-	t_room	*in_room;
-	t_room	*out_room;
-
-	if (!(in_room = ft_at_key(e->rooms, in)))
-		return (1);
-	if (!(out_room = ft_at_key(e->rooms, out)))
-		return (1);
-	e->adj_mat[in_room->id][out_room->id] = 1;
-	e->adj_mat[out_room->id][in_room->id] = 1;
-	return (0);
-}
-
 static int	get_pipe(t_lemin *e, char *line)
 {
 	t_pipe	pipe;
 	size_t	i;
 	size_t	sd;
 
-	i = 0;
-	if (!e->adj_mat)
+	if (!(i = 0) && !e->adj_mat)
 		create_adj_mat(e);
 	while (line[i] && line[i] != '-')
 		++i;
@@ -102,38 +66,6 @@ static int	get_pipe(t_lemin *e, char *line)
 	return (0);
 }
 
-static int	iscmd(t_lemin *e, t_stream *s, char *line)
-{
-	t_room		**tmp;
-	t_string	l;
-
-	tmp = NULL;
-	if (!ft_strcmp(line, "##start") && !e->start)
-		tmp = &e->start;
-	else if (!ft_strcmp(line, "##end") && !e->end)
-		tmp = &e->end;
-	if (!tmp)
-		error();
-	if ((l.size = ft_stream_getline(s, &l.str)) > -1)
-	{
-		ft_push_back(e->input, &l.str);
-		get_room(e, l.str, tmp);
-	}
-	return (0);
-}
-
-static int	ispipe(char *line)
-{
-	size_t	i;
-
-	i = 0;
-	while (line[i] && line[i] != '-')
-		++i;
-	if (line[i] == '-')
-		return (1);
-	return (0);
-}
-
 void		gethill(t_lemin *e)
 {
 	t_stream		*stdin;
@@ -145,7 +77,10 @@ void		gethill(t_lemin *e)
 	while (ft_stream_good(stdin))
 	{
 		if (!((line.size = ft_stream_getline(stdin, &line.str)) > -1))
+		{
+			free(line.str);
 			continue ;
+		}
 		ft_push_back(e->input, &line.str);
 		if (ft_strncmp(line.str, "##", 2) && !ft_strncmp(line.str, "#", 1))
 			(void)NULL;

@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_hill.c                                       :+:      :+:    :+:   */
+/*   bitset_1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/23 10:45:42 by bhivert           #+#    #+#             */
-/*   Updated: 2017/01/23 10:45:45 by bhivert          ###   ########.fr       */
+/*   Created: 2017/01/23 11:04:57 by bhivert           #+#    #+#             */
+/*   Updated: 2017/01/23 11:06:09 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "bitset.h"
 
-static void	putinput(void *osef, char **line)
+int		bitset_none(size_t bitset)
 {
-	(void)osef;
-	ft_putendl(*line);
+	if (!bitset)
+		return (1);
+	return (0);
 }
 
-void		print_hill(t_lemin *e)
+int		bitset_any(size_t bitset)
 {
-	ft_iter(e->input, NULL, (void(*)(void *, void *))&putinput);
-	ft_putendl("");
+	int		rs;
+
+	rs = bitset_none(bitset);
+	return (!rs);
+}
+
+size_t	bitset_size(void)
+{
+	return (sizeof(size_t) << 3);
 }

@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_hill.c                                       :+:      :+:    :+:   */
+/*   ants_run.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/23 10:45:42 by bhivert           #+#    #+#             */
-/*   Updated: 2017/01/23 10:45:45 by bhivert          ###   ########.fr       */
+/*   Created: 2017/01/23 11:14:51 by bhivert           #+#    #+#             */
+/*   Updated: 2017/01/23 11:16:14 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#ifndef ANTS_RUN_H
+# define ANTS_RUN_H
 
-static void	putinput(void *osef, char **line)
-{
-	(void)osef;
-	ft_putendl(*line);
-}
+# include "lem_in.h"
 
-void		print_hill(t_lemin *e)
-{
-	ft_iter(e->input, NULL, (void(*)(void *, void *))&putinput);
-	ft_putendl("");
-}
+t_run_room	*new_run_room(t_lemin *e, size_t room_id);
+void		fill_active_ways(t_lemin *e, t_container *active_ways, \
+		size_t wayset);
+
+#endif

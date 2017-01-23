@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_hill.c                                       :+:      :+:    :+:   */
+/*   getways.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/23 10:45:42 by bhivert           #+#    #+#             */
-/*   Updated: 2017/01/23 10:45:45 by bhivert          ###   ########.fr       */
+/*   Created: 2017/01/23 11:10:12 by bhivert           #+#    #+#             */
+/*   Updated: 2017/01/23 11:46:48 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#ifndef GETWAYS_H
+# define GETWAYS_H
 
-static void	putinput(void *osef, char **line)
-{
-	(void)osef;
-	ft_putendl(*line);
-}
+# include "lem_in.h"
 
-void		print_hill(t_lemin *e)
-{
-	ft_iter(e->input, NULL, (void(*)(void *, void *))&putinput);
-	ft_putendl("");
-}
+size_t			getpossibility(t_lemin *e, size_t room);
+t_container		*create_begins(t_lemin *e, t_container *current_way, \
+					size_t current_room);
+size_t			getnextpossibility(t_lemin *e, size_t current_room, \
+					size_t last_possibility);
+
+#endif

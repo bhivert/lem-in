@@ -35,24 +35,32 @@ INCS_FLAGS	=	-Iincludes \
 SUB_MAKE	=	libft \
 
 SRCS_DIR	=	srcs
-SRCS_SRCS	=	$(SRCS_DIR)/ants_run.c \
-			$(SRCS_DIR)/checkhill.c \
-			$(SRCS_DIR)/gethill.c \
-			$(SRCS_DIR)/getways.c \
-			$(SRCS_DIR)/main.c \
-			$(SRCS_DIR)/print_hill.c \
-			$(SRCS_DIR)/stable_research.c \
+SRCS_SRCS	=$(SRCS_DIR)/ants_run.c \
+$(SRCS_DIR)/ants_run_1.c \
+$(SRCS_DIR)/checkhill.c \
+$(SRCS_DIR)/free_memory_fct.c \
+$(SRCS_DIR)/gethill_0.c \
+$(SRCS_DIR)/gethill_1.c \
+$(SRCS_DIR)/getways_0.c \
+$(SRCS_DIR)/getways_1.c \
+$(SRCS_DIR)/main.c \
+$(SRCS_DIR)/print_hill.c \
+$(SRCS_DIR)/stable_research_0.c \
+$(SRCS_DIR)/stable_research_1.c \
+$(SRCS_DIR)/stable_research_2.c \
 
 SRCS_STREAM_DIR	=	srcs/stream
-SRCS_STREAM_SRCS	=	$(SRCS_STREAM_DIR)/stream_delete.c \
-			$(SRCS_STREAM_DIR)/stream_flush.c \
-			$(SRCS_STREAM_DIR)/stream_getline.c \
-			$(SRCS_STREAM_DIR)/stream_new.c \
-			$(SRCS_STREAM_DIR)/stream_out.c \
-			$(SRCS_STREAM_DIR)/stream_state.c \
+SRCS_STREAM_SRCS	=$(SRCS_STREAM_DIR)/stream_delete.c \
+$(SRCS_STREAM_DIR)/stream_flush.c \
+$(SRCS_STREAM_DIR)/stream_getline_0.c \
+$(SRCS_STREAM_DIR)/stream_getline_1.c \
+$(SRCS_STREAM_DIR)/stream_new.c \
+$(SRCS_STREAM_DIR)/stream_out.c \
+$(SRCS_STREAM_DIR)/stream_state.c \
 
 SRCS_BITSET_DIR	=	srcs/bitset
-SRCS_BITSET_SRCS	=	$(SRCS_BITSET_DIR)/bitset.c \
+SRCS_BITSET_SRCS	=$(SRCS_BITSET_DIR)/bitset_0.c \
+$(SRCS_BITSET_DIR)/bitset_1.c \
 
 SRCS		=	$(SRCS_SRCS) \
 			$(SRCS_STREAM_SRCS) \
