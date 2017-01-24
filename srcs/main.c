@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 11:32:11 by bhivert           #+#    #+#             */
-/*   Updated: 2017/01/20 10:05:33 by bhivert          ###   ########.fr       */
+/*   Updated: 2017/01/24 13:16:36 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,32 +43,28 @@ void	init(t_lemin *e)
 	if (!(e->ways = ft_new_container(VECTOR, sizeof(t_container *))))
 		badalloc(__FILE__, __LINE__);
 	e->stable_mat = NULL;
+	e->endr.next_tab = NULL;
+	e->endr.tab_size = 0;
+	e->endr.arrived = 0;
 }
 
-//static void	putri(char **n)
-//{
-//	ft_putstr(*n);
-//}
-////static void	putr(t_room *r)
-//{
-//	ft_putstr(r->name);
-//	ft_putstr(" id = ");
-//	ft_putnbr(r->id);
-//}
-//
-//static void	putw(size_t *r)
-//{
-//	ft_putchar(' ');
-//	ft_putnbr(*r);
-//}
-//
-//static void	put(t_container **c)
-//{
-//	ft_debug_container(*c, (void(*)(void *))&putw);
-//	ft_putchar('\n');
-//}
+void	free_memory(t_lemin *e)
+{
+	ft_set_content_destroy(e->input, (void (*)(void *))&free_input);
+	ft_delete_container(&e->input);
+	ft_set_content_destroy(e->rooms, (void (*)(void *))&free_room);
+	ft_delete_container(&e->rooms);
+	ft_delete_container(&e->rooms_ids);
+	free(e->adj_mat[0]);
+	free(e->adj_mat);
+	ft_set_content_destroy(e->ways, (void(*)(void *))&ft_delete_container);
+	ft_delete_container(&e->ways);
+	free(e->stable_mat[0]);
+	free(e->stable_mat);
+	free_se(e);
+	free_end_room(&e->endr);
+}
 
-# include "ft_printf.h"
 int		main(void)
 {
 	t_lemin		e;
@@ -81,47 +77,6 @@ int		main(void)
 	wayset_id = stableresearch(&e);
 	print_hill(&e);
 	ants_run(&e, wayset_id);
-
-// =============================================================================
-
-//	ft_debug_container(e.rooms_ids, (void(*)(void *))&putri);
-//	ft_debug_container(e.rooms, (void(*)(void *))&putr);
-//	ft_debug_container(e.ways, (void(*)(void *))&put);
-
-//	size_t	x, y;
-
-//	y = 0;
-//	while (y < ft_size(e.rooms))
-//	{
-//		x = 0;
-//		while (x < ft_size(e.rooms))
-//		{
-//			ft_putnbr(e.adj_mat[y][x]);
-//			ft_putstr(" ");
-//			++x;
-//		}
-//		ft_putchar('\n');
-//		++y;
-//	}
-
-//	ft_putchar('\n');
-//	y = 0;
-//	while (y < ft_size(e.ways))
-//	{
-//		x = 0;
-//		while (x < ft_size(e.ways))
-//		{
-//			ft_putnbr(e.stable_mat[y][x]);
-//			ft_putstr(" ");
-//			++x;
-//		}
-//		ft_putchar('\n');
-//		++y;
-//	}
-
-//	ft_printf("%zu\n", wayset_id);
-
-// =============================================================================
-
+	free_memory(&e);
 	return (EXIT_SUCCESS);
 }
