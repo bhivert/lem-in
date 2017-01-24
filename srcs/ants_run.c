@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 11:43:46 by bhivert           #+#    #+#             */
-/*   Updated: 2017/01/20 16:27:45 by bhivert          ###   ########.fr       */
+/*   Updated: 2017/01/24 13:25:18 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ void	ants_run(t_lemin *e, size_t wayset_id)
 
 	last_id = 0;
 	ants_run_init(e, &end, wayset_id);
-	while (end.arrived != e->ants)
+	while (end.arrived < e->ants)
 	{
 		i = 0;
 		while (i < end.tab_size)
