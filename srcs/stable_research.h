@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 11:29:00 by bhivert           #+#    #+#             */
-/*   Updated: 2017/01/23 11:33:21 by bhivert          ###   ########.fr       */
+/*   Updated: 2017/01/24 11:01:59 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ void		collision_check_fct0(t_context *context, size_t *id);
 int			collision_check(t_lemin *e, t_container *way_y, t_container *way_x);
 void		fill_stable_mat(t_lemin *e);
 size_t		stable_sub_set_equality_collision(t_lemin *e, int **mat, \
-					size_t y, size_t i[2]);
+				size_t y, size_t i[2]);
 int			**stable_mat_cpy(t_lemin *e);
+int			stable_sub_set_collision_0(t_lemin *e, int **mat, \
+				size_t *i, size_t y);
 
 #endif

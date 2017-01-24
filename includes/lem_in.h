@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 11:32:46 by bhivert           #+#    #+#             */
-/*   Updated: 2017/01/23 13:32:53 by bhivert          ###   ########.fr       */
+/*   Updated: 2017/01/24 10:38:08 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ typedef struct	s_lemin
 	char		**adj_mat;
 	t_container	*ways;
 	int			**stable_mat;
+	t_run_end	endr;
 }				t_lemin;
 
 void			error(void);

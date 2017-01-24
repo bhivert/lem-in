@@ -6,11 +6,11 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 11:09:28 by bhivert           #+#    #+#             */
-/*   Updated: 2017/01/23 11:12:13 by bhivert          ###   ########.fr       */
+/*   Updated: 2017/01/24 10:07:26 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "getways.h"
 
 size_t			getpossibility(t_lemin *e, size_t room)
 {
@@ -61,4 +61,17 @@ size_t			getnextpossibility(t_lemin *e, size_t current_room, \
 			return (i);
 	}
 	return (-1);
+}
+
+void			getways_rev_0(t_lemin *e, t_container *begins, \
+		t_container **b, size_t possibility)
+{
+	if ((b = ft_at_index(begins, ft_size(begins) - 1)))
+	{
+		if (!checkway(*b, possibility))
+			getways_rec(e, *b, possibility);
+		else
+			ft_delete_container(b);
+		ft_pop_back(begins);
+	}
 }

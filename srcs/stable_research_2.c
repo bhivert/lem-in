@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 11:32:20 by bhivert           #+#    #+#             */
-/*   Updated: 2017/01/23 11:32:59 by bhivert          ###   ########.fr       */
+/*   Updated: 2017/01/24 11:01:32 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,26 @@ size_t	stable_sub_set_equality_collision(t_lemin *e, int **mat, \
 	if (x_ncollision >= i_ncollision)
 		return (0);
 	return (1);
+}
+
+int		stable_sub_set_collision_0(t_lemin *e, int **mat, \
+		size_t *i, size_t y)
+{
+	size_t	tmp;
+
+	if (e->stable_mat[y][i[0]] > e->stable_mat[y][i[1]])
+	{
+		e->stable_mat[y][i[0]] = 0;
+		return (1);
+	}
+	else if (e->stable_mat[y][i[0]] < e->stable_mat[y][i[1]])
+		e->stable_mat[y][i[1]] = 0;
+	else
+	{
+		tmp = stable_sub_set_equality_collision(e, mat, y, i);
+		e->stable_mat[y][i[tmp]] = 0;
+		if (!tmp)
+			return (1);
+	}
+	return (0);
 }

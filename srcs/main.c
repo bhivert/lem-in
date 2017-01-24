@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 11:32:11 by bhivert           #+#    #+#             */
-/*   Updated: 2017/01/23 13:25:04 by bhivert          ###   ########.fr       */
+/*   Updated: 2017/01/24 13:16:36 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,9 @@ void	init(t_lemin *e)
 	if (!(e->ways = ft_new_container(VECTOR, sizeof(t_container *))))
 		badalloc(__FILE__, __LINE__);
 	e->stable_mat = NULL;
+	e->endr.next_tab = NULL;
+	e->endr.tab_size = 0;
+	e->endr.arrived = 0;
 }
 
 void	free_memory(t_lemin *e)
@@ -59,6 +62,7 @@ void	free_memory(t_lemin *e)
 	free(e->stable_mat[0]);
 	free(e->stable_mat);
 	free_se(e);
+	free_end_room(&e->endr);
 }
 
 int		main(void)
