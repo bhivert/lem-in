@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 12:22:39 by bhivert           #+#    #+#             */
-/*   Updated: 2017/01/23 17:48:49 by bhivert          ###   ########.fr       */
+/*   Updated: 2017/01/24 13:38:01 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,35 @@ static int	get_pipe(t_lemin *e, char *line)
 	return (0);
 }
 
+static int	gethill_0(t_lemin *e, t_string *line, t_stream *stdin, t_bool *set)
+{
+	if (!((line->size = ft_stream_getline(stdin, &line->str)) > -1))
+	{
+		free(line->str);
+		return (1);
+	}
+	ft_push_back(e->input, &line->str);
+	if (ft_strncmp(line->str, "##", 2) && !ft_strncmp(line->str, "#", 1))
+		(void)NULL;
+	else if (!(*set) && (*set = D_TRUE))
+		e->ants = ft_atoi(line->str);
+	else if (!ft_strncmp(line->str, "##", 2))
+	{
+		if (iscmd(e, stdin, line->str))
+			return (0);
+	}
+	else if (ispipe(line->str) || (e->adj_mat && ispipe(line->str)))
+	{
+		if (get_pipe(e, line->str))
+			return (0);
+	}
+	else if (!ispipe(line->str) && !e->adj_mat)
+		get_room(e, line->str, NULL);
+	else
+		return (0);
+	return (1);
+}
+
 void		gethill(t_lemin *e)
 {
 	t_stream		*stdin;
@@ -76,28 +105,8 @@ void		gethill(t_lemin *e)
 	stdin = ft_new_stream(0, 4096);
 	while (ft_stream_good(stdin))
 	{
-		if (!((line.size = ft_stream_getline(stdin, &line.str)) > -1))
-		{
-			free(line.str);
+		if (gethill_0(e, &line, stdin, &set))
 			continue ;
-		}
-		ft_push_back(e->input, &line.str);
-		if (ft_strncmp(line.str, "##", 2) && !ft_strncmp(line.str, "#", 1))
-			(void)NULL;
-		else if (!set && (set = D_TRUE))
-			e->ants = ft_atoi(line.str);
-		else if (!ft_strncmp(line.str, "##", 2))
-		{
-			if (iscmd(e, stdin, line.str))
-				break ;
-		}
-		else if (ispipe(line.str) || (e->adj_mat && ispipe(line.str)))
-		{
-			if (get_pipe(e, line.str))
-				break ;
-		}
-		else if (!ispipe(line.str) && !e->adj_mat)
-			get_room(e, line.str, NULL);
 		else
 			break ;
 	}
