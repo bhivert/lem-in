@@ -35,7 +35,7 @@ INCS_FLAGS	=	-Iincludes \
 SUB_MAKE	=	libft \
 
 SRCS_DIR	=	srcs
-SRCS_SRCS	=$(SRCS_DIR)/ants_run.c \
+SRCS_SRCS	=$(SRCS_DIR)/ants_run_0.c \
 $(SRCS_DIR)/ants_run_1.c \
 $(SRCS_DIR)/checkhill.c \
 $(SRCS_DIR)/free_memory_fct.c \
