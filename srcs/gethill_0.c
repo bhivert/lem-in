@@ -6,7 +6,7 @@
 /*   By: bhivert <bhivert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/07 12:22:39 by bhivert           #+#    #+#             */
-/*   Updated: 2017/01/24 13:38:01 by bhivert          ###   ########.fr       */
+/*   Updated: 2017/01/24 14:12:53 by bhivert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void		get_room(t_lemin *e, char *line, t_room **sav)
 	room.id = ft_size(e->rooms);
 	if (!room.name \
 			|| !ft_strncmp(room.name, "L", 1) \
+			|| !ft_strncmp(room.name, "#", 1) \
 			|| (ft_sscanf(line + i, "%d %d", &room.pos_x, &room.pos_y) != 2) \
 			|| room.pos_x < 0 \
 			|| room.pos_y < 0)
